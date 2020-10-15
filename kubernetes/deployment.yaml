@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: k8s-sidecar-injector
+    track: prod
+  name: k8s-sidecar-injector-prod
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      k8s-app: k8s-sidecar-injector
+      track: prod
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: k8s-sidecar-injector
+        track: prod
+    spec:
+      containers:
+      - command:
+        - entrypoint.sh
+        env:
+        - name: TLS_CERT_FILE
+          value: /var/lib/secrets/sidecar-injector.crt
+        - name: TLS_KEY_FILE
+          value: /var/lib/secrets/sidecar-injector.key
+        - name: LOG_LEVEL
+          value: "2"
+        - name: CONFIG_DIR
+          value: conf/
+        - name: CONFIGMAP_LABELS
+          value: app=k8s-sidecar-injector
+        image: tumblr/k8s-sidecar-injector:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: https
+            scheme: HTTPS
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        name: k8s-sidecar-injector
+        ports:
+        - containerPort: 9443
+          name: https
+          protocol: TCP
+        - containerPort: 9000
+          name: http-metrics
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 1Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/secrets
+          name: secrets
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: k8s-sidecar-injector
+      serviceAccountName: k8s-sidecar-injector
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: secrets
+        secret:
+          defaultMode: 420
+          secretName: k8s-sidecar-injector
+status: {}
