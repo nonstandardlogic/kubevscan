@@ -24,7 +24,7 @@ data:
         name: test-config
     containers:
     - name: sidecar-nginx
-      image: nginx:1.12.2
+      image: aquasec/trivy
       imagePullPolicy: IfNotPresent
       ports:
       - containerPort: 80
