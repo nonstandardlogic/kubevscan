@@ -62,3 +62,14 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Generate certificates for kubevscan api server 
+*/}}
+{{- define "kubevscan.gen-certs" -}}
+{{- $altNames := list ( printf "%s.%s" (include "kubevscan.name" .) .Release.Namespace ) ( printf "%s.%s.svc" (include "kubevscan.name" .) .Release.Namespace ) -}}
+{{- $ca := genCA "kubevscan-ca" 365 -}}
+{{- $cert := genSignedCert ( include "kubevscan.name" . ) nil $altNames 365 $ca -}}
+tls.crt: {{ $cert.Cert | b64enc }}
+tls.key: {{ $cert.Key | b64enc }}
+{{- end -}}
