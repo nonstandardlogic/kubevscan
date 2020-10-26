@@ -23,7 +23,7 @@ data:
       configMap:
         name: test-config
     containers:
-    - name: sidecar-nginx
+    - name: sidecar-trivy
       image: aquasec/trivy
       imagePullPolicy: IfNotPresent
       ports:
@@ -31,6 +31,12 @@ data:
       env:
         - name: ENV_IN_SIDECAR
           value: test-in-sidecar
+    - name: sidecar-kubevscan
+      image: nonstandardlogic/kubescan-agent
+      imagePullPolicy: IfNotPresent
+      ports:
+      - containerPort: 8080
+
 ---
 # configmap to test sharing a volume between sidecar and existing container
 apiVersion: v1
