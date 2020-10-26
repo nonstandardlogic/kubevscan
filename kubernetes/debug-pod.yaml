@@ -7,10 +7,10 @@ metadata:
     injector.tumblr.com/request: test1
 spec:
   containers:
-  - image: debian:jessie
+  - name: debian-debug
+    image: debian:jessie
     command:
       - sleep
       - "3600"
     imagePullPolicy: IfNotPresent
-    name: debian-debug
   restartPolicy: Never
