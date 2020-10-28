@@ -76,6 +76,6 @@ spec:
       volumes:
         - name: secrets
           secret:
-            defaultMode: {{ .Values.secret.defaultMode }}
-            secretName: {{ .Values.secret.secretName }}
+            defaultMode: 420 #{{ .Values.secret.defaultMode }}
+            secretName:  k8s-sidecar-injector #{{ .Values.secret.secretName }}
 status: {}

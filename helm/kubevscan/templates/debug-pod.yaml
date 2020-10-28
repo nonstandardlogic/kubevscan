@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debian-debug
+  namespace: default
+  annotations:
+    injector.tumblr.com/request: kubevscan
+spec:
+  containers:
+  - name: debian-debug
+    image: debian:jessie
+    command:
+      - sleep
+      - "3600"
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Never
