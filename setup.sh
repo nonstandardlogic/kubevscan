@@ -17,6 +17,7 @@ BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR=${BASE_DIR}/config
 TLS_DIR=${CONFIG_DIR}/tls
 K8S_DIR=${BASE_DIR}/kubernetes
+HELM_DIR=${BASE_DIR}/helm
 
 ORG="nonstandardlogic"
 DOMAIN="nonstandardlogic.com"
@@ -48,8 +49,10 @@ p -f "$K8S_DIR"/source/*.* "${K8S_DIR}"
 sed -i -e "s|__CA_BUNDLE_BASE64__|$CABUNDLE_BASE64|g"  mutating-webhook-configuration.yaml 
 
 # Helm Script
-
-
+cd "$HELM_DIR" || { printf "Failure to cd to %s \n" "$HELM_DIR" ; exit 1; }
+echo "Distribution name: "
+read DISTRIBUTION
+helm install $DISTRIBUTION ./kubevscan
 
 printf "Kubevscan deployment completed...\n"
 exit 0
