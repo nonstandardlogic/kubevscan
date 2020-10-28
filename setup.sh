@@ -48,6 +48,11 @@ printf "Set required variables in mutating-webhook-configuration.yaml..\n"
 p -f "$K8S_DIR"/source/*.* "${K8S_DIR}"
 sed -i -e "s|__CA_BUNDLE_BASE64__|$CABUNDLE_BASE64|g"  mutating-webhook-configuration.yaml 
 
+
+printf "Set secrets..\n"
+kubectl create secret generic k8s-sidecar-injector --from-file=$TLS_DIR/${DEPLOYMENT}/${CLUSTER}/sidecar-injector.crt --from-file=$TLS_DIR/${DEPLOYMENT}/${CLUSTER}/sidecar-injector.key --namespace=kube-system
+
+
 # Helm Script
 cd "$HELM_DIR" || { printf "Failure to cd to %s \n" "$HELM_DIR" ; exit 1; }
 echo "Distribution name: "
