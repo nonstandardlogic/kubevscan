@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "kubevscan.fullname" . }}
+  name: {{- include "kubevscan.fullname" . }}
   labels:
     {{- include "kubevscan.labels" . | nindent 4 }}
   name: {{ .Values.appName }}-prod

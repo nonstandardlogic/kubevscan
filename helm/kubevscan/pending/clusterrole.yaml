@@ -2,11 +2,11 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  #labels:
-  #  app.kubernetes.io/name: {{ template "kubevscan.name" . }}
-  #  helm.sh/chart: {{ template "kubevscan.chart" . }}
-  #  app.kubernetes.io/instance: {{ .Release.Name }}
-  #  app.kubernetes.io/managed-by: {{ .Release.Service }}
+  labels:
+    app.kubernetes.io/name: {{ template "kubevscan.name" . }}
+    helm.sh/chart: {{ template "kubevscan.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
   name: {{ .Values.appName }}
 rules:
   - apiGroups:
