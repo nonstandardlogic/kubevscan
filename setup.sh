@@ -32,7 +32,19 @@ export CLUSTER
 cd "$TLS_DIR" || { printf "Failure to cd to %s \n" "$TLS_DIR" ; exit 1; }
 
 printf "Set required variables in ca.conf csr-prod.conf..\n"
-cp -f "$TLS_DIR"/source/*.* "${TLS_DIR}"
+
+if [ ! -f "$TLS_DIR"/source/ca.conf ]; then
+    printf "original ca.conf not found!\n"
+    exit 1
+fi
+
+if [ ! -f "$TLS_DIR"/source/csr-prod.conf ]; then
+    printf "original ca.conf not found!\n"
+    exit 1
+fi
+
+cp -f "$TLS_DIR"/source/ca.conf "${TLS_DIR}"
+cp -f "$TLS_DIR"/source/csr-prod.conf "${TLS_DIR}"
 sed -i -e "s|__ORG__|$ORG|g" -e "s|__DOMAIN__|$DOMAIN|g" ca.conf csr-prod.conf
 
 printf "Generating certs..\n"
@@ -43,8 +55,13 @@ CABUNDLE_BASE64="$(cat $TLS_DIR/$DEPLOYMENT/$CLUSTER/ca.crt |base64|tr -d '\n')"
 
 cd "$K8S_DIR" || { printf "Failure to cd to %s \n" "$K8S_DIR" ; exit 1; }
 
+if [ ! -f "$K8S_DIR"/source/mutating-webhook-configuration.yaml ]; then
+    printf "original mutating-webhook-configuration.yaml not found!\n"
+    exit 1
+fi
+
 printf "Set required variables in mutating-webhook-configuration.yaml..\n"
-p -f "$K8S_DIR"/source/*.* "${K8S_DIR}"
+cp -f "$K8S_DIR"/source/mutating-webhook-configuration.yaml "${K8S_DIR}"
 sed -i -e "s|__CA_BUNDLE_BASE64__|$CABUNDLE_BASE64|g"  mutating-webhook-configuration.yaml
 
 # Instruction for configuring mutating-webhook-configuration.yaml while using helm

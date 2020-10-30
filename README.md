@@ -79,11 +79,11 @@ Deploy the kubernetes manifests
     $ kubectl apply -f kubernetes/clusterrole.yaml 
     clusterrole.rbac.authorization.k8s.io/k8s-sidecar-injector created
 
-    $ kubectl apply -f kubernetes/clusterrolebinding.yaml 
-    clusterrolebinding.rbac.authorization.k8s.io/k8s-sidecar-injector created
-
     $ kubectl apply -f kubernetes/serviceaccount.yaml 
     serviceaccount/k8s-sidecar-injector created
+
+    $ kubectl apply -f kubernetes/clusterrolebinding.yaml 
+    clusterrolebinding.rbac.authorization.k8s.io/k8s-sidecar-injector created
 
     $ kubectl apply -f kubernetes/service.yaml 
     service/k8s-sidecar-injector-prod created 
@@ -94,7 +94,7 @@ Deploy the kubernetes manifests
     $ kubectl apply -f kubernetes/mutating-webhook-configuration.yaml 
     mutatingwebhookconfiguration.admissionregistration.k8s.io/tumblr-sidecar-injector-webhook created
 
-Deploy the sample ConfigMap with Nginx sidecar config
+Deploy the sample ConfigMap with Trivy sidecar config
 
     $ kubectl create -f kubernetes/configmap-sidecar-test.yaml
     configmap/sidecar-test created
