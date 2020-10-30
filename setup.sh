@@ -61,20 +61,17 @@ if [ ! -f "$K8S_DIR"/source/mutating-webhook-configuration.yaml ]; then
 fi
 
 printf "Set required variables in mutating-webhook-configuration.yaml..\n"
-cp -f "$K8S_DIR"/source/mutating-webhook-configuration.yaml "${K8S_DIR}"
-sed -i -e "s|__CA_BUNDLE_BASE64__|$CABUNDLE_BASE64|g"  mutating-webhook-configuration.yaml
-
-# Instruction for configuring mutating-webhook-configuration.yaml while using helm
-#sed -i -e "s|__CA_BUNDLE_BASE64__|$CABUNDLE_BASE64|g"  "${HELM_DIR}"/kubevscan/values.yaml
+cp -f "$HELM_DIR"/kubevscan/src/values.yaml "${HELM_DIR}"/kubevscan/
+sed -i -e "s|__CA_BUNDLE_BASE64__|$CABUNDLE_BASE64|g"  "${HELM_DIR}"/kubevscan/values.yaml
 
 printf "Set secrets..\n"
 kubectl create secret generic k8s-sidecar-injector --from-file=$TLS_DIR/${DEPLOYMENT}/${CLUSTER}/sidecar-injector.crt --from-file=$TLS_DIR/${DEPLOYMENT}/${CLUSTER}/sidecar-injector.key --namespace=kube-system
 
 # Helm Script
-#cd "$HELM_DIR" || { printf "Failure to cd to %s \n" "$HELM_DIR" ; exit 1; }
-#printf "Distribution name: "
-#read DISTRIBUTION
-#helm install $DISTRIBUTION ./kubevscan
+cd "$HELM_DIR" || { printf "Failure to cd to %s \n" "$HELM_DIR" ; exit 1; }
+printf "Distribution name: "
+read DISTRIBUTION
+helm install $DISTRIBUTION ./kubevscan
 
 printf "\n Kubevscan deployment completed..\n"
 exit 0
