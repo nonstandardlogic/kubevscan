@@ -6,6 +6,7 @@ replicaCount: 1
 namespace: kube-system
 appName: k8s-sidecar-injector
 track: prod
+caBundle: "__CA_BUNDLE_BASE64__"
 
 image:
   repository: tumblr/k8s-sidecar-injector

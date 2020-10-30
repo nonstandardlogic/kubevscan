@@ -6,7 +6,7 @@ The project uses a sidecar injector to create for each pod a vulnerability scan 
 
 The chosen sidecar injector is the open source [k8s-sidecar-injector](https://github.com/tumblr/k8s-sidecar-injector)
 
-The following steps describe the installation and configuration of the sidecar inector.
+The following steps describe the installation and configuration of the sidecar injector.
 
 First step is to pull the docker image :
 
@@ -33,13 +33,12 @@ Install Ruby
 
 Generate certs
 
-    $ DEPLOYMENT=london CLUSTER=CLUSTER ./new-cluster-injector-cert.rb
+    $ DEPLOYMENT=london CLUSTER=DEV ./new-cluster-injector-cert.rb
     All done!
     Here are your certs for london-DEV
     Generated new certs for london-DEV for k8s-sidecar-injector
 
 The certs are available in the sub directory london/DEV
-
 
 Update MutatingWebhookConfiguration file
 
@@ -108,7 +107,7 @@ Check sidecar injector logs
     I1015 14:36:37.504124       1 main.go:131] triggering ConfigMap reconciliation
     I1015 14:36:37.504153       1 watcher.go:151] Fetching ConfigMaps...
     I1015 14:36:37.508225       1 watcher.go:158] Fetched 1 ConfigMaps
-    I1015 14:36:37.508488       1 watcher.go:179] Loaded InjectionConfig test1 from ConfigMap sidecar-test:test1
+    I1015 14:36:37.508488       1 watcher.go:179] Loaded InjectionConfig kubevscan from ConfigMap sidecar-test:kubevscan
     I1015 14:36:37.508515       1 watcher.go:164] Found 1 InjectionConfigs in sidecar-test
     I1015 14:36:37.508521       1 main.go:137] got 1 updated InjectionConfigs from reconciliation
     I1015 14:36:37.508525       1 main.go:151] updating server with newly loaded configurations (1 loaded from disk, 1 loaded from k8s api)
@@ -129,7 +128,7 @@ Check sidecar injection in the pod description
     Node:         minikube/172.17.0.2
     Start Time:   Thu, 15 Oct 2020 15:44:38 +0100
     Labels:       <none>
-    Annotations:  injector.tumblr.com/request: test1
+    Annotations:  injector.tumblr.com/request: kubevscan
                 injector.tumblr.com/status: injected
     Status:       Pending
     IP:           

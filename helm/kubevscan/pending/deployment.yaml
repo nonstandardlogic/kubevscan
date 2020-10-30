@@ -1,16 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: {{ include "kubevscan.fullname" . }}
   labels:
-    k8s-app: k8s-sidecar-injector
-    track: prod
-  name: k8s-sidecar-injector-prod
-  namespace: kube-system
+    {{- include "kubevscan.labels" . | nindent 4 }}
+  name: {{ .Values.appName }}-prod
+  namespace: {{ .Values.namespace }}
 spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
   selector:
     matchLabels:
-      k8s-app: k8s-sidecar-injector
-      track: prod
+      {{- include "kubevscan.selectorLabels" . | nindent 6 }}
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -20,8 +22,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        k8s-app: k8s-sidecar-injector
-        track: prod
+        {{- include "kubevscan.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - command:
@@ -36,9 +37,9 @@ spec:
         - name: CONFIG_DIR
           value: conf/
         - name: CONFIGMAP_LABELS
-          value: app=k8s-sidecar-injector
-        image: tumblr/k8s-sidecar-injector:latest
-        imagePullPolicy: Always
+          value: app={{ .Values.appName }}  
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -49,7 +50,8 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 3
-        name: k8s-sidecar-injector
+        name: {{ .Values.appName }}
+        securityContext: {}
         ports:
         - containerPort: 9443
           name: https
@@ -58,27 +60,22 @@ spec:
           name: http-metrics
           protocol: TCP
         resources:
-          limits:
-            cpu: 500m
-            memory: 2Gi
-          requests:
-            cpu: 500m
-            memory: 1Gi
+            {{- toYaml .Values.resources | nindent 12 }}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /var/lib/secrets
           name: secrets
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
+      dnsPolicy: {{ .Values.pod.dnsPolicy }}
+      restartPolicy: {{ .Values.pod.restartPolicy }}
+      schedulerName: {{ .Values.pod.schedulerName }}
       securityContext: {}
-      serviceAccount: k8s-sidecar-injector
-      serviceAccountName: k8s-sidecar-injector
+      serviceAccount: {{ .Values.appName }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: secrets
-        secret:
-          defaultMode: 420
-          secretName: k8s-sidecar-injector
+        - name: secrets
+          secret:
+            defaultMode: {{ .Values.secret.defaultMode }}
+            secretName:  {{ .Values.secret.secretName }}
 status: {}

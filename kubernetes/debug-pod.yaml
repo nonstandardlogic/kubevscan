@@ -4,7 +4,7 @@ metadata:
   name: debian-debug
   namespace: default
   annotations:
-    injector.tumblr.com/request: test1
+    injector.tumblr.com/request: kubevscan
 spec:
   containers:
   - name: debian-debug

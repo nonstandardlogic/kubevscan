@@ -8,8 +8,8 @@ metadata:
     app: k8s-sidecar-injector
     track: test
 data:
-  test1: |
-    name: test1
+  kubevscan: |
+    name: kubevscan
     env:
       - name: HELLO
         value: world
@@ -23,14 +23,6 @@ data:
       configMap:
         name: test-config
     containers:
-    - name: sidecar-trivy
-      image: aquasec/trivy
-      imagePullPolicy: IfNotPresent
-      ports:
-      - containerPort: 80
-      env:
-        - name: ENV_IN_SIDECAR
-          value: test-in-sidecar
     - name: sidecar-kubevscan
       image: nonstandardlogic/kubescan-agent
       imagePullPolicy: IfNotPresent
