@@ -9,7 +9,7 @@
 # * Ruby, Kubectl, Helm and AWS CLI.
 ##
 
-set -x
+set +x
 
 printf "Starting to deploy components...\n\n"
 
@@ -24,10 +24,22 @@ DOMAIN="nonstandardlogic.com"
 DEPLOYMENT="london"
 CLUSTER="DEV"
 
+DEPLOYMENT_DIR=${TLS_DIR}/${DEPLOYMENT}
+CLUSTER_DIR=${DEPLOYMENT_DIR}/${CLUSTER}
+
 export ORG
 export DOMAIN
 export DEPLOYMENT
 export CLUSTER
+
+
+if [ -d "$CLUSTER_DIR" ] ; then
+    if [ -d "$DEPLOYMENT_DIR" ] ; then 
+        rm -Rf $DEPLOYMENT_DIR
+    fi
+    rm -Rf $CLUSTER_DIR
+fi
+
 
 cd "$TLS_DIR" || { printf "Failure to cd to %s \n" "$TLS_DIR" ; exit 1; }
 
