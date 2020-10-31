@@ -7,9 +7,9 @@ The goal of this project is to provide a vulnerability scanner that continuously
 
 The project creates for each pod a vulnerability scanner container based on the open source project [Trivy](https://github.com/aquasecurity/trivy).
 
-The vulnerability scanner is a sidecar container injected into the pod using the open source [k8s-sidecar-injector](https://github.com/tumblr/k8s-sidecar-injector).
+The vulnerability scanner is a sidecar container injected into the pod using the open source project [k8s-sidecar-injector](https://github.com/tumblr/k8s-sidecar-injector).
 
-The vulnerability scanner container [kubevscan-agent](https://github.com/nonstandardlogic/kubevscan-agent).
+The vulnerability scanner sidecar container is [kubevscan-agent](https://github.com/nonstandardlogic/kubevscan-agent).
 
 
 ## Installation
