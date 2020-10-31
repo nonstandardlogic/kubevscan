@@ -4,13 +4,13 @@ metadata:
   name: debian-debug
   namespace: default
   annotations:
-    injector.tumblr.com/request: test1
+    injector.tumblr.com/request: kubevscan
 spec:
   containers:
-  - image: debian:jessie
+  - name: debian-debug
+    image: debian:jessie
     command:
       - sleep
       - "3600"
     imagePullPolicy: IfNotPresent
-    name: debian-debug
   restartPolicy: Never

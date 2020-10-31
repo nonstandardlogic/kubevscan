@@ -1,0 +1,99 @@
+# Default values for kubevscan.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+namespace: kube-system
+appName: k8s-sidecar-injector
+track: prod
+caBundle: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZ5VENDQTdFQ0ZBNDlnZjFHUTFPdWZUK1JwaFoyK3FQVUFOYnRNQTBHQ1NxR1NJYjNEUUVCQ3dVQU1JR2YKTVFzd0NRWURWUVFHRXdKVlV6RVJNQThHQTFVRUNBd0lUbVYzSUZsdmNtc3hGakFVQmdOVkJBY01EVTVsZHlCWgpiM0pySUVOcGRIa3hHVEFYQmdOVkJBb01FRzV2Ym5OMFlXNWtZWEprYkc5bmFXTXhJREFlQmdOVkJBTU1GMnM0CmN5MXphV1JsWTJGeUxXbHVhbVZqZEc5eUxVTkJNU2d3SmdZSktvWklodmNOQVFrQkZobHVkV3hzUUc1dmJuTjAKWVc1a1lYSmtiRzluYVdNdVkyOXRNQ0FYRFRJd01UQXpNREl4TURBeE1sb1lEelEzTlRnd09USTJNakV3TURFeQpXakNCbnpFTE1Ba0dBMVVFQmhNQ1ZWTXhFVEFQQmdOVkJBZ01DRTVsZHlCWmIzSnJNUll3RkFZRFZRUUhEQTFPClpYY2dXVzl5YXlCRGFYUjVNUmt3RndZRFZRUUtEQkJ1YjI1emRHRnVaR0Z5Wkd4dloybGpNU0F3SGdZRFZRUUQKREJkck9ITXRjMmxrWldOaGNpMXBibXBsWTNSdmNpMURRVEVvTUNZR0NTcUdTSWIzRFFFSkFSWVpiblZzYkVCdQpiMjV6ZEdGdVpHRnlaR3h2WjJsakxtTnZiVENDQWlJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dJUEFEQ0NBZ29DCmdnSUJBT3BPS2ZGMG5GQTR5VFk4c0p6WE5YZkk0TkRXdkhscHYvMWRFZ0o0L29Fb3ppblQvd004RDlRZXZTUGYKQitrYnJKVEdXL2NTV1hPNE9oNW5GRWUrS1pEV1N4ZlRRKzZMbm9CVjlNb1VYZ2Rrb3VEa3hkMnRRWSs5UGs2ZgpuclRzZ2VCb3pMNlU3VXpDU1dQdE5GTG40NXQ3ZEZnRGx4RERidWpFUGFINDBYNWU2M1NoSlF4MEcvQVBiRVQ0Ckl1VWZlL3JTSDJCUFpBQjNCb1RraWgyK2pKVWZ4SmxhT1pLRkRJSElCLzZrZzY5OFBRWlhOd08vbjZJS2doNmUKRDM1aXNUVmRmaEpDR082KzNoUWtXQzQyalhSeEJxWUEwNm1pdnZadHVkOS9wcVhHdmhmV25INTNialZYdDR1UwpVT0lqUHBqbGYwTEE5ZXNFYmZDM3FPSUx2eEtPNi9MZzFCU1c5NXBNYWRUcGdZSVMrcHFGTTdiWDVTY01qR1duClZNTGJaQVlsS1lFYUdTOHNNei9QKy9ldVVJZUYyS2ZOVVo3VlJCVGE5M3o3cW16WklOSUdNSEJYUTFDTkJBODQKK1ZSTWRJYmQ4UUNXTlgyYnRYUUhIMFh2bFZnVnFQc21OYkswcld4eGxLYW05VWxrU3lNc2hyL0llK25MQmpCcAprTWwyMVpGbjVpdnJ0eG5vVlYvUTkrSGN6TjM0SjFjZGxWOFE2TFhtcFpNeC9aQXVEM1ZtYnhxcWNsNzNicmhJCm5pVXZJUTZQRWcxVFVkTlJ6YTZacklZeStWMHArUG42WXpFWkZuWTJWNDN4aEJpYkk5U2NRcXQ0TFRZR1U2YjMKZ2NiVExGVGtDUmtvVmlWa1Fnc3RRZzBrYldBOWpOUllyaVBGVFdHRTdUWGZsVExGQWdNQkFBRXdEUVlKS29aSQpodmNOQVFFTEJRQURnZ0lCQUE0N1RoNVJvNVMzVmtIZ1NaTmlNVm5zVzJONTNqTytnUnQxQ21FaUF2YVVyblRDCjdleFJnSnVUTEhlTy9UUktJMmtMM2VicFhjQUFOR0EzZm5wY3k0LzVOWm5lQjdUaERKMzd1YkpoY2NEdCtYWkgKZ01IY25FMWdOUk5wNjBNWWEyeHB6eGM5QXlPMC9vYkhhM3luMnV0TFRseTdyZm53aTBVRjhCQUVhakdWMC8yaApYVTByTENYblpRczdUV2ovWXBRNUNaLzFCb3FYb2U0RzZsUmFJRUhwR3IwNXkydFBCOWJORHpRa2k3VVR3TnN4CnlNSUpaQVZxQzBKMGVZR2V2ekdXYXNTYUI5S0NpQlp2NlNiOGpraGYwa1loSHJya2tDZm45cy9jaVFSTHhuTmsKaWtFcktETUxSRDFpTVE0ZTVHZ3dRd25wb0NsWkpncnpCV0FzVDBrTXB1MHhPMDlHUjlGZmtrd1dkbUszbGNoZAo0SVFud0NZTHp3L3gzOE5SVTJ2a3doUjJGSHU0QlhlZG1kYVlBOWsweno3K21yWURoekdpV2t6VFNodWo0MWcrCjBrUFZ2QWY1UzViZVNQZHNMRzRVbW8rc01VcUZHb2pjd2FVcUZydnV3NWNMTEF2WmpzQS9JMDhDSk5hTHRnOUEKZUY5SW51UkhlNGxoZmsxaWNZMnh0UzVNOFo1THNiSUY0RkhwdXlYZGcrdXlMSWh6VTFSTnEyUW9nZTFTMUE4cQpxVjlHdkdBZktIWDRNRFVFM3lZZ3haRUliL0dLQStKYy9Uc2E3ZThVU2tiZmZiTlJiNEdmZHZiSG1VVDAwRFc2CkN4WmxPOEtVamZ0R1J0SGt0cXlQVUpHTUJmUk94OVQxU0s2RDZWQ2hnR0ltK2tiTXNUak5kbXg2NFF2TQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+
+image:
+  repository: tumblr/k8s-sidecar-injector
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: k8s-sidecar-injector
+
+rbac:
+    # Specifies whether a cluster role should be created
+    create: true
+    # Annotations to add to the cluster role
+    annotations: {}
+
+pod:
+  restartPolicy: Always
+  dnsPolicy: ClusterFirst
+  schedulerName: default-scheduler
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+secret:
+  defaultMode: 420
+  secretName: k8s-sidecar-injector
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  httpPort: 80
+  httpsPort: 443
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 500m
+    memory: 2Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
