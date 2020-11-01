@@ -1,4 +1,4 @@
-apiVersion: admissionregistration.k8s.io/v1beta1
+apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   name: "tumblr-sidecar-injector-webhook"
@@ -23,3 +23,5 @@ webhooks:
       path: "/mutate"   # what /url/slug to send requests at
     # See README.md for how this was generated!
     caBundle: "{{ .Values.caBundle }}"
+  admissionReviewVersions: ["v1", "v1beta1"]
+  sideEffects: None

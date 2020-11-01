@@ -1,6 +1,7 @@
 #!/bin/bash
-set -x
-printf "Starting to uninstall components...\n\n"
+set +x
+
+echo "Starting to uninstall components..."
 
 kubectl delete serviceaccount k8s-sidecar-injector -n kube-system
 kubectl delete service k8s-sidecar-injector-prod -n kube-system
@@ -13,5 +14,7 @@ kubectl delete clusterroleBinding k8s-sidecar-injector
 kubectl delete clusterrole k8s-sidecar-injector
 kubectl delete secrets k8s-sidecar-injector --namespace=kube-system
 
-printf "\n All components removed...\n"
+echo "All components related to k8s-sidecar-injector have been removed."
+echo "Please uninstall the Helm distribution"
+
 exit 0
