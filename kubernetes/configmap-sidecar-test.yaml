@@ -25,7 +25,7 @@ data:
     containers:
     - name: sidecar-kubevscan
       image: nonstandardlogic/kubescan-agent
-      imagePullPolicy: IfNotPresent
+      imagePullPolicy: Always
       ports:
       - containerPort: 8080
 
