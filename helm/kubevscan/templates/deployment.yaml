@@ -1,10 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "kubevscan.fullname" . }}
+  name: {{ .Values.appName }}-{{ .Values.track}}
   labels:
     {{- include "kubevscan.labels" . | nindent 4 }}
-  name: {{ .Values.appName }}-{{ .Values.track}}
   namespace: {{ .Values.namespace }}
 spec:
 {{- if not .Values.autoscaling.enabled }}
