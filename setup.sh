@@ -67,11 +67,6 @@ CABUNDLE_BASE64="$(cat $TLS_DIR/$DEPLOYMENT/$CLUSTER/ca.crt |base64|tr -d '\n')"
 
 cd "$K8S_DIR" || { printf "Failure to cd to %s \n" "$K8S_DIR" ; exit 1; }
 
-if [ ! -f "$K8S_DIR"/source/mutating-webhook-configuration.yaml ]; then
-    printf "original mutating-webhook-configuration.yaml not found!\n"
-    exit 1
-fi
-
 printf "Set required variables in mutating-webhook-configuration.yaml..\n"
 cp -f "$HELM_DIR"/kubevscan/src/values.yaml "${HELM_DIR}"/kubevscan/
 sed -i -e "s|__CA_BUNDLE_BASE64__|$CABUNDLE_BASE64|g"  "${HELM_DIR}"/kubevscan/values.yaml
