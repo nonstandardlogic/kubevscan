@@ -1,20 +1,20 @@
-# kubevscan
+# Kubevscan
 
 
 ## What is this?
 
-The goal of this project is to provide a vulnerability scanner that continuously scans containers deployed in a kubernetes cluster.
+The goal of this project is to provide a vulnerability scanner that continuously scans containers deployed in a Kubernetes cluster.
 
-The project creates for each pod a vulnerability scanner container based on the open source project [Trivy](https://github.com/aquasecurity/trivy).
+The project creates for each pod a vulnerability scanner container based on the open-source project [Trivy](https://github.com/aquasecurity/trivy).
 
-The vulnerability scanner is a sidecar container injected into the pod using the open source project [k8s-sidecar-injector](https://github.com/tumblr/k8s-sidecar-injector).
+The vulnerability scanner is a sidecar container injected into the pod using the open-source project [k8s-sidecar-injector](https://github.com/tumblr/k8s-sidecar-injector).
 
 The vulnerability scanner sidecar container is [kubevscan-agent](https://github.com/nonstandardlogic/kubevscan-agent).
 
 
 ## Installation
 
-Set the environment variables defined in the setup.sh script. 
+Set the environment variables defined in the *setup.sh* script. 
 The variables *ORG* and *DOMAIN* are used to generated [certs](https://github.com/tumblr/k8s-sidecar-injector/blob/master/docs/tls.md) for the sidecar injector. 
 The variables *DEPLOYMENT* and *CLUSTER* are used to create certs directories (example DEPLOYMENT=us-east-1 and CLUSTER=PRODUCTION). 
 
@@ -23,7 +23,7 @@ The variables *DEPLOYMENT* and *CLUSTER* are used to create certs directories (e
     DEPLOYMENT=
     CLUSTER=
 
-Run the install scrips which installs and configures the sidecar injector into the kubernetes cluster.
+Run the setup script which installs and configures the sidecar injector into the Kubernetes cluster.
 
     $ ./setup.sh 
     Starting to deploy components...
