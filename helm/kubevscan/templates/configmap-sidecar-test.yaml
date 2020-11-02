@@ -25,7 +25,16 @@ data:
     containers:
     - name: sidecar-kubevscan
       image: nonstandardlogic/kubescan-agent
-      imagePullPolicy: IfNotPresent
+      env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      imagePullPolicy: Always
       ports:
       - containerPort: 8080
 
