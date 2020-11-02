@@ -4,7 +4,6 @@ metadata:
   #name: {{ template "kubevscan.fullname" . }}
   labels:
     {{- include "kubevscan.labels" . | nindent 4 }}
-  name: {{ .Values.appName }}-{{ .Values.track}}
   namespace: {{ .Values.namespace }}
 spec:
 {{- if not .Values.autoscaling.enabled }}
